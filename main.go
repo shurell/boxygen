@@ -39,7 +39,7 @@ func (elem *boxTorets) buildTorets(s string) {
 		fmt.Println("Глухой торец бокса")
 	}
 	if s == "thumb" {
-		fmt.Println("Торец с вырезом бокса")
+		fmt.Println("Торец бокса с вырезом")
 	}
 	fmt.Println("Рассчитываем вершины")
 }
@@ -50,7 +50,20 @@ func main() {
 	genBoxy(96.0, 50.0, 57.0, 3.0, 15.0, 20.0)
 }
 
+func checkSpykeLen(v, s float32) bool {
+	if (v / s) <= 2.4 {
+		fmt.Println("Слишком большой размер шипа!")
+		return true
+	}
+	return false
+
+}
+
 func genBoxy(sw, sh, sd, tm, sl, rr float32) {
+
+	if checkSpykeLen(sw, sl) || checkSpykeLen(sh, sl) || checkSpykeLen(sd, sl) {
+		fmt.Println("ПРОБЛЕМА!")
+	}
 
 	w := sw - tm
 	h := sh - tm

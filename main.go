@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 type boxElement struct {
 	width     float32
@@ -14,15 +17,21 @@ type boxTorets struct {
 	rr float32
 }
 
-func (elem *boxElement) buildElem(s string) {
-	verticles := [][]float32{{0.0}, {0.0}}
+func (elem *boxElement) buildElem(s string) [][]float32 {
+	verticles := [][]float32{{0}, {0}} // стартовая точка
 	if s == "bottom" {
 		fmt.Println("Дно бокса")
+		qtySpykeW := math.Round(float64(elem.width / elem.shipLen))
+		qtySpykeH := math.Round(float64(elem.height / elem.shipLen))
+		fmt.Println("Доступное кол-во шипов по длинной стороне:", qtySpykeW, ":: по короткой стороне:", qtySpykeH)
+
 	}
 	if s == "side" {
 		fmt.Println("Стенка бокса")
 	}
-	fmt.Println("Рассчитываем вершины")
+	fmt.Println("Рассчитываем вершины", verticles)
+
+	return verticles
 }
 
 func (elem *boxTorets) buildTorets(s string) {
